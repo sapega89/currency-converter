@@ -138,3 +138,6 @@ Thumbs.db
 # app/*.exe - commented out to allow committing exe for distribution
 # app/*.dll
 
+# GitHub
+.github/workflows
+
