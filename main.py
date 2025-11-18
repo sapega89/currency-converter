@@ -9,4 +9,3 @@ if __name__ == "__main__":
     client = CurrencyClient()
     # Run application (mode will be determined automatically)
     client.run()
-
