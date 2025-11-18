@@ -4,13 +4,13 @@
 from typing import Tuple
 
 # Import DTO for menu item
-from dtos import MenuItemDTO
+from .dtos import MenuItemDTO
 
 # Import menu option enumeration
-from enums import MenuOption
+from .enums import MenuOption
 
 # Import text messages for menu
-from messages import (
+from .messages import (
     MENU_CHANGE_RATE_DESCRIPTION,
     MENU_CONVERT_DESCRIPTION,
     MENU_EXIT_DESCRIPTION,

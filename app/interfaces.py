@@ -10,10 +10,10 @@ from decimal import Decimal
 from typing import Optional
 
 # Import DTOs (Data Transfer Objects) - objects for data transfer
-from dtos import ConversionDTO, ConversionResultDTO, DecimalInputDTO, RateUpdateDTO
+from .dtos import ConversionDTO, ConversionResultDTO, DecimalInputDTO, RateUpdateDTO
 
 # Import currency and menu option enumerations
-from enums import Currency, MenuOption
+from .enums import Currency, MenuOption
 
 
 class InputHandler(ABC):

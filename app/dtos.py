@@ -8,10 +8,10 @@ from decimal import Decimal
 from typing import Optional
 
 # Import currency, menu option, and input type enumerations
-from enums import Currency, InputKind, MenuOption
+from .enums import Currency, InputKind, MenuOption
 
 # Import class for positive number validation and validation function
-from fields import PositiveDecimal, ensure_positive_decimal
+from .fields import PositiveDecimal, ensure_positive_decimal
 
 
 # @dataclass decorator automatically creates __init__, __repr__, __eq__ and other methods

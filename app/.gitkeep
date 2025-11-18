@@ -1,0 +1,3 @@
+# This file ensures the app directory is tracked by git
+# The executable files (*.exe) are ignored but the folder structure is preserved
+

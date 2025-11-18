@@ -10,26 +10,26 @@ from decimal import Decimal, InvalidOperation
 from typing import Dict, Mapping, Optional, Tuple
 
 # Import DTOs (Data Transfer Objects)
-from dtos import ConversionDTO  # DTO for conversion request
-from dtos import ConversionResultDTO  # DTO for conversion result
-from dtos import DecimalInputDTO  # DTO for decimal input request
-from dtos import MenuItemDTO  # DTO for menu item
-from dtos import RateUpdateDTO  # DTO for rate update
+from .dtos import ConversionDTO  # DTO for conversion request
+from .dtos import ConversionResultDTO  # DTO for conversion result
+from .dtos import DecimalInputDTO  # DTO for decimal input request
+from .dtos import MenuItemDTO  # DTO for menu item
+from .dtos import RateUpdateDTO  # DTO for rate update
 
 # Import enumerations and base rates
-from enums import BaseRate, Currency, MenuOption
+from .enums import BaseRate, Currency, MenuOption
 
 # Import class for positive number validation
-from fields import PositiveDecimal
+from .fields import PositiveDecimal
 
 # Import abstract interfaces that we implement
-from interfaces import CurrencyConverter  # Interface for conversion
-from interfaces import InputHandler  # Interface for input
-from interfaces import OutputHandler  # Interface for output
-from interfaces import RateRepository  # Interface for rate storage
+from .interfaces import CurrencyConverter  # Interface for conversion
+from .interfaces import InputHandler  # Interface for input
+from .interfaces import OutputHandler  # Interface for output
+from .interfaces import RateRepository  # Interface for rate storage
 
 # Import all text messages
-from messages import (
+from .messages import (
     CHOICE_OUT_OF_RANGE,
     CHOOSE_RATE_TO_CHANGE,
     CONVERSION_RESULT,

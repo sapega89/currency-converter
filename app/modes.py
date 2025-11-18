@@ -7,19 +7,19 @@ from decimal import Decimal
 from typing import Tuple
 
 # Import DTOs for data handling
-from dtos import ConversionResultDTO, DecimalInputDTO, RateUpdateDTO
+from .dtos import ConversionResultDTO, DecimalInputDTO, RateUpdateDTO
 
 # Import enumerations
-from enums import Currency, InputKind, MenuOption
+from .enums import Currency, InputKind, MenuOption
 
 # Import class for positive number validation
-from fields import PositiveDecimal
+from .fields import PositiveDecimal
 
 # Import interfaces for typing
-from interfaces import CurrencyConverter, InputHandler, OutputHandler, RateRepository
+from .interfaces import CurrencyConverter, InputHandler, OutputHandler, RateRepository
 
 # Import text messages
-from messages import (
+from .messages import (
     CURRENT_RATE_MESSAGE,
     DEMO_MESSAGE,
     ENTER_AMOUNT_EUR,

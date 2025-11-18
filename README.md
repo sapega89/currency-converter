@@ -24,15 +24,25 @@ The project follows SOLID principles:
 
 ```
 convertert/
-├── tetete.py              # Main application class (Facade pattern)
-├── interfaces.py          # Abstract interfaces (DIP)
-├── implementations.py      # Concrete implementations
-├── modes.py               # Application modes (Interactive, Demo)
-├── menu_handler.py        # Menu handling
-├── dtos.py                # Data Transfer Objects
-├── enums.py               # Enumerations
-├── fields.py              # Field validation
-└── messages.py            # Centralized text messages
+├── main.py                # Main application entry point
+├── app/                   # Application package
+│   ├── __init__.py        # Package initialization
+│   ├── main.py            # Main application class (CurrencyClient)
+│   ├── interfaces.py      # Abstract interfaces (DIP)
+│   ├── implementations.py # Concrete implementations
+│   ├── modes.py           # Application modes (Interactive, Demo)
+│   ├── menu_handler.py    # Menu handling
+│   ├── dtos.py            # Data Transfer Objects
+│   ├── enums.py           # Enumerations
+│   ├── fields.py          # Field validation
+│   └── messages.py        # Centralized text messages
+├── dist/                  # Build output (executable files)
+│   └── currency-converter.exe  # Standalone executable
+├── build_exe.bat          # Script to build executable
+├── build_exe.spec         # PyInstaller spec file
+└── .github/               # CI/CD workflows
+    └── workflows/
+        └── lint.yml
 ```
 
 ## Usage
@@ -65,8 +75,13 @@ client.run(RunMode.DEMO)  # or RunMode.INTERACTIVE
 ### Direct Execution
 
 ```bash
-python tetete.py
 ```
+
+The executable will be created in the `dist/` directory as `currency-converter.exe` (Windows) or `currency-converter` (Linux/Mac).
+
+**Requirements:**
+- Install build dependencies: `pip install -r requirements-build.txt`
+- Or PyInstaller will be installed automatically by the build script
 
 ## Design Patterns
 
@@ -119,10 +134,45 @@ The pipeline checks:
 - Import sorting (isort)
 - Code linting (flake8)
 
+## Building Executable
+
+To create a standalone executable file for Windows:
+
+### Prerequisites
+
+Install build dependencies:
+
+```bash
+pip install -r requirements-build.txt
+```
+
+### Build Process
+
+Run the build script:
+
+Or manually:
+
+```bash
+python -m PyInstaller --onefile --name currency-converter --console main.py
+```
+
+The executable will be created in:
+- `dist/currency-converter.exe` (build output)
+- `app/currency-converter.exe` (application folder, ready for distribution)
+
+### Manual Build with Spec File
+
+For more control, use the spec file:
+
+```bash
+python -m PyInstaller build_exe.spec
+```
+
 ## Requirements
 
 - Python 3.7+
 - No external dependencies (uses only standard library)
+- PyInstaller (only for building executable)
 
 ## License
 

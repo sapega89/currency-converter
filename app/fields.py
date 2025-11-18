@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from decimal import Decimal
 
 # Import validation error message
-from messages import VALUE_MUST_BE_POSITIVE
+from .messages import VALUE_MUST_BE_POSITIVE
 
 
 def ensure_positive_decimal(value: Decimal, field_name: str) -> None:

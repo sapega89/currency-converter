@@ -6,25 +6,25 @@ from decimal import Decimal
 from typing import Mapping, Optional, Tuple
 
 # Import application run mode enumeration
-from enums import RunMode
+from .enums import RunMode
 
 # Import concrete interface implementations (console input/output handlers, repository, converter)
-from implementations import ConsoleInputHandler  # Implementation for reading data from console
-from implementations import ConsoleOutputHandler  # Implementation for outputting data to console
-from implementations import DefaultCurrencyConverter  # Currency conversion logic
-from implementations import DefaultRateRepository  # Storage of exchange rates in memory
+from .implementations import ConsoleInputHandler  # Implementation for reading data from console
+from .implementations import ConsoleOutputHandler  # Implementation for outputting data to console
+from .implementations import DefaultCurrencyConverter  # Currency conversion logic
+from .implementations import DefaultRateRepository  # Storage of exchange rates in memory
 
 # Import abstract interfaces (DIP principle - dependency on abstractions)
-from interfaces import CurrencyConverter, InputHandler, OutputHandler, RateRepository
+from .interfaces import CurrencyConverter, InputHandler, OutputHandler, RateRepository
 
 # Import menu handler
-from menu_handler import MenuHandler
+from .menu_handler import MenuHandler
 
 # Import text messages
-from messages import UNSUPPORTED_RUN_MODE
+from .messages import UNSUPPORTED_RUN_MODE
 
 # Import application mode classes
-from modes import DemoMode, InteractiveMode
+from .modes import DemoMode, InteractiveMode
 
 
 class CurrencyClient:
