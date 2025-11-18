@@ -1,51 +1,54 @@
 """Interface implementations."""
+
 # Import sys for checking input type (interactive or not)
 import sys
-# Import types for annotations
-from typing import Dict, Tuple, Optional, Mapping
+
 # Import Decimal for precise calculations and InvalidOperation for error handling
 from decimal import Decimal, InvalidOperation
 
-# Import abstract interfaces that we implement
-from interfaces import (
-    InputHandler,        # Interface for input
-    OutputHandler,       # Interface for output
-    CurrencyConverter,   # Interface for conversion
-    RateRepository,      # Interface for rate storage
-)
+# Import types for annotations
+from typing import Dict, Mapping, Optional, Tuple
+
 # Import DTOs (Data Transfer Objects)
-from dtos import (
-    ConversionDTO,        # DTO for conversion request
-    ConversionResultDTO,  # DTO for conversion result
-    DecimalInputDTO,      # DTO for decimal input request
-    RateUpdateDTO,        # DTO for rate update
-    MenuItemDTO,          # DTO for menu item
-)
+from dtos import ConversionDTO  # DTO for conversion request
+from dtos import ConversionResultDTO  # DTO for conversion result
+from dtos import DecimalInputDTO  # DTO for decimal input request
+from dtos import MenuItemDTO  # DTO for menu item
+from dtos import RateUpdateDTO  # DTO for rate update
+
 # Import enumerations and base rates
-from enums import Currency, MenuOption, BaseRate
+from enums import BaseRate, Currency, MenuOption
+
 # Import class for positive number validation
 from fields import PositiveDecimal
+
+# Import abstract interfaces that we implement
+from interfaces import CurrencyConverter  # Interface for conversion
+from interfaces import InputHandler  # Interface for input
+from interfaces import OutputHandler  # Interface for output
+from interfaces import RateRepository  # Interface for rate storage
+
 # Import all text messages
 from messages import (
-    EMPTY_INPUT_USE_DEFAULT,
-    EMPTY_INPUT_NOT_ALLOWED,
-    INVALID_NUMBER,
-    INVALID_VALUE,
-    PLEASE_ENTER_VALID_NUMBER,
     CHOICE_OUT_OF_RANGE,
-    YOUR_CHOICE,
-    OPTION_NUMBER,
-    WARN_PREFIX,
-    CURRENT_EXCHANGE_RATES,
-    RATE_FORMAT,
-    EMPTY_LINE,
+    CHOOSE_RATE_TO_CHANGE,
     CONVERSION_RESULT,
     CURRENCY_AMOUNT_FORMAT,
+    CURRENT_EXCHANGE_RATES,
+    EMPTY_INPUT_NOT_ALLOWED,
+    EMPTY_INPUT_USE_DEFAULT,
+    EMPTY_LINE,
     EXCHANGE_MENU_HEADER,
+    INVALID_NUMBER,
+    INVALID_VALUE,
     MENU_ITEM_FORMAT,
-    CHOOSE_RATE_TO_CHANGE,
-    RATE_SELECTION_ITEM_FORMAT,
     NO_RATE_FOUND,
+    OPTION_NUMBER,
+    PLEASE_ENTER_VALID_NUMBER,
+    RATE_FORMAT,
+    RATE_SELECTION_ITEM_FORMAT,
+    WARN_PREFIX,
+    YOUR_CHOICE,
 )
 
 
@@ -286,8 +289,8 @@ class DefaultCurrencyConverter(CurrencyConverter):
         """Converts EUR -> USD -> CNY."""
         # Create DTO for conversion from EUR to USD
         eur_to_usd = ConversionDTO(
-            from_currency=Currency.EUR,      # Source currency - euro
-            to_currency=Currency.USD,       # Target currency - dollar
+            from_currency=Currency.EUR,  # Source currency - euro
+            to_currency=Currency.USD,  # Target currency - dollar
             amount=PositiveDecimal(eur_amount),  # Amount in euros (wrapped in PositiveDecimal for validation)
         )
         # Perform first conversion: EUR -> USD
@@ -295,8 +298,8 @@ class DefaultCurrencyConverter(CurrencyConverter):
 
         # Create DTO for conversion from USD to CNY
         usd_to_cny = ConversionDTO(
-            from_currency=Currency.USD,    # Source currency - dollar
-            to_currency=Currency.CNY,       # Target currency - yuan
+            from_currency=Currency.USD,  # Source currency - dollar
+            to_currency=Currency.CNY,  # Target currency - yuan
             amount=PositiveDecimal(usd_amount),  # Amount in dollars (result of previous conversion)
         )
         # Perform second conversion: USD -> CNY
@@ -304,7 +307,7 @@ class DefaultCurrencyConverter(CurrencyConverter):
 
         # Create and return DTO with results of all conversions
         return ConversionResultDTO(
-            eur=eur_amount,    # Original amount in euros
-            usd=usd_amount,   # Converted amount in dollars
-            cny=cny_amount,   # Converted amount in yuan
+            eur=eur_amount,  # Original amount in euros
+            usd=usd_amount,  # Converted amount in dollars
+            cny=cny_amount,  # Converted amount in yuan
         )

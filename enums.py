@@ -1,9 +1,11 @@
 # Import Decimal for working with monetary amounts
 from decimal import Decimal
+
 # Import Enum for creating enumerations
 from enum import Enum
+
 # Import types for annotations
-from typing import Tuple, Dict
+from typing import Dict, Tuple
 
 
 # Create currency enumeration
@@ -13,6 +15,7 @@ class Currency(Enum):
     Enumeration of supported currencies.
     Each currency has a string value for display.
     """
+
     # Euro with value "EUR"
     EUR = "EUR"
     # US Dollar with value "USD"
@@ -20,12 +23,14 @@ class Currency(Enum):
     # Chinese Yuan with value "CNY"
     CNY = "CNY"
 
+
 # Create menu option enumeration
 class MenuOption(Enum):
     """
     Menu option enumeration.
     Values are strings that user enters to select option.
     """
+
     # Convert option with value "1" (user enters "1")
     CONVERT = "1"
     # Change rate option with value "2" (user enters "2")
@@ -40,6 +45,7 @@ class InputKind(Enum):
     Input validation type enumeration.
     Defines what checks to perform when entering a number.
     """
+
     # Any number (no restrictions)
     ANY = "any"
     # Only positive number (greater than zero)
@@ -51,6 +57,7 @@ class RunMode(Enum):
     """
     Application run mode enumeration.
     """
+
     # Interactive mode (with menu and user input)
     INTERACTIVE = "interactive"
     # Demonstration mode (shows example without input)
@@ -63,6 +70,7 @@ class BaseRate(Enum):
     Base exchange rate enumeration.
     Each element contains tuple: (currency1, currency2, rate).
     """
+
     # Rate EUR -> USD: 1 euro = 1.25 dollars
     # Value is tuple of three elements
     EUR_USD = (Currency.EUR, Currency.USD, Decimal("1.25"))
@@ -74,7 +82,7 @@ class BaseRate(Enum):
     def pair(self) -> Tuple[Currency, Currency]:
         """
         Returns currency pair from enumeration value.
-        
+
         Returns:
             Tuple[Currency, Currency]: Tuple (currency1, currency2)
         """
@@ -87,7 +95,7 @@ class BaseRate(Enum):
     def rate(self) -> Decimal:
         """
         Returns exchange rate from enumeration value.
-        
+
         Returns:
             Decimal: Exchange rate
         """
@@ -99,7 +107,7 @@ class BaseRate(Enum):
     def to_rates(cls) -> Dict:
         """
         Converts all enumeration elements to rates dictionary.
-        
+
         Returns:
             Dict: Dictionary {(currency1, currency2): rate}
         """

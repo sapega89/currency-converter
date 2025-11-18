@@ -1,7 +1,9 @@
 # Import dataclass decorator for creating data classes
 from dataclasses import dataclass
+
 # Import Decimal for working with monetary amounts
 from decimal import Decimal
+
 # Import validation error message
 from messages import VALUE_MUST_BE_POSITIVE
 
@@ -9,11 +11,11 @@ from messages import VALUE_MUST_BE_POSITIVE
 def ensure_positive_decimal(value: Decimal, field_name: str) -> None:
     """
     Checks that Decimal value is positive.
-    
+
     Args:
         value: Value to check
         field_name: Field name (for error message)
-        
+
     Raises:
         ValueError: If value is less than or equal to zero
     """
@@ -31,6 +33,7 @@ class PositiveDecimal:
     Wrapper class for Decimal, ensuring value is positive.
     Used for validating monetary amounts and exchange rates.
     """
+
     # amount attribute stores Decimal value
     amount: Decimal
 

@@ -74,6 +74,51 @@ python tetete.py
 - **Dependency Injection**: Components can be injected for testing and flexibility
 - **Strategy Pattern**: Different modes (Interactive, Demo) can be easily added
 
+## Development
+
+### Code Quality
+
+The project uses automated code quality checks:
+
+- **black**: Code formatting
+- **isort**: Import sorting
+- **flake8**: Linting
+
+### Local Setup
+
+Install development dependencies:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+### Running Checks Locally
+
+```bash
+# Format code with black
+black .
+
+# Sort imports with isort
+isort .
+
+# Check code with flake8
+flake8 .
+
+# Run all checks
+black --check . && isort --check-only . && flake8 .
+```
+
+### CI/CD
+
+GitHub Actions automatically runs code quality checks on:
+- Every push to `main` or `develop` branches
+- Every pull request
+
+The pipeline checks:
+- Code formatting (black)
+- Import sorting (isort)
+- Code linting (flake8)
+
 ## Requirements
 
 - Python 3.7+
@@ -82,4 +127,3 @@ python tetete.py
 ## License
 
 MIT
-

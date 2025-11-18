@@ -1,15 +1,18 @@
 """Menu handler for following Single Responsibility Principle."""
+
 # Import Tuple for return type annotation
 from typing import Tuple
 
 # Import DTO for menu item
 from dtos import MenuItemDTO
+
 # Import menu option enumeration
 from enums import MenuOption
+
 # Import text messages for menu
 from messages import (
-    MENU_CONVERT_DESCRIPTION,
     MENU_CHANGE_RATE_DESCRIPTION,
+    MENU_CONVERT_DESCRIPTION,
     MENU_EXIT_DESCRIPTION,
 )
 
@@ -25,7 +28,7 @@ class MenuHandler:
     def get_menu_items(self) -> Tuple[MenuItemDTO, ...]:
         """
         Returns menu items.
-        
+
         Returns:
             Tuple[MenuItemDTO, ...]: Tuple of menu items (immutable list)
         """

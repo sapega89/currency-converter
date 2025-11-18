@@ -1,27 +1,33 @@
 """Implementations of various application modes."""
+
 # Import Decimal for working with monetary amounts
 from decimal import Decimal
+
 # Import Tuple for type annotations
 from typing import Tuple
 
 # Import DTOs for data handling
 from dtos import ConversionResultDTO, DecimalInputDTO, RateUpdateDTO
+
 # Import enumerations
-from enums import Currency, MenuOption, InputKind
+from enums import Currency, InputKind, MenuOption
+
 # Import class for positive number validation
 from fields import PositiveDecimal
+
 # Import interfaces for typing
-from interfaces import InputHandler, OutputHandler, CurrencyConverter, RateRepository
+from interfaces import CurrencyConverter, InputHandler, OutputHandler, RateRepository
+
 # Import text messages
 from messages import (
-    EXIT_MESSAGE,
-    UNKNOWN_COMMAND,
     CURRENT_RATE_MESSAGE,
+    DEMO_MESSAGE,
+    ENTER_AMOUNT_EUR,
     ENTER_NEW_RATE,
+    EXIT_MESSAGE,
     INVALID_VALUE,
     NEW_RATE_MESSAGE,
-    ENTER_AMOUNT_EUR,
-    DEMO_MESSAGE,
+    UNKNOWN_COMMAND,
 )
 
 
@@ -106,7 +112,9 @@ class InteractiveMode:
         current_rate = self._rate_repository.get_all_rates()[(from_cur, to_cur)]
 
         # Display current rate to user
-        self._output.print(CURRENT_RATE_MESSAGE.format(from_currency=from_cur.value, to_currency=to_cur.value, rate=current_rate))
+        self._output.print(
+            CURRENT_RATE_MESSAGE.format(from_currency=from_cur.value, to_currency=to_cur.value, rate=current_rate)
+        )
 
         # Infinite loop for retrying on input error
         while True:
@@ -122,7 +130,7 @@ class InteractiveMode:
                 # Create DTO for rate update
                 rate_dto = RateUpdateDTO(
                     from_currency=from_cur,  # Source currency
-                    to_currency=to_cur,      # Target currency
+                    to_currency=to_cur,  # Target currency
                     rate=PositiveDecimal(new_rate_value),  # New rate (wrapped for validation)
                 )
             # If validation failed (e.g., rate is negative)
@@ -138,7 +146,7 @@ class InteractiveMode:
                 NEW_RATE_MESSAGE.format(
                     from_currency=rate_dto.from_currency.value,
                     to_currency=rate_dto.to_currency.value,
-                    rate=rate_dto.rate.amount
+                    rate=rate_dto.rate.amount,
                 )
             )
             # Break loop (rate successfully updated)

@@ -1,32 +1,36 @@
 """Main application class implementing the Facade pattern."""
+
 # Import types for type annotations (Optional - optional parameter, Mapping - dictionary, Tuple - tuple)
-from typing import Optional, Mapping, Tuple
 # Import Decimal for precise monetary calculations (avoiding float rounding errors)
 from decimal import Decimal
+from typing import Mapping, Optional, Tuple
 
 # Import application run mode enumeration
 from enums import RunMode
-# Import abstract interfaces (DIP principle - dependency on abstractions)
-from interfaces import InputHandler, OutputHandler, CurrencyConverter, RateRepository
+
 # Import concrete interface implementations (console input/output handlers, repository, converter)
-from implementations import (
-    ConsoleInputHandler,      # Implementation for reading data from console
-    ConsoleOutputHandler,    # Implementation for outputting data to console
-    DefaultRateRepository,   # Storage of exchange rates in memory
-    DefaultCurrencyConverter,  # Currency conversion logic
-)
+from implementations import ConsoleInputHandler  # Implementation for reading data from console
+from implementations import ConsoleOutputHandler  # Implementation for outputting data to console
+from implementations import DefaultCurrencyConverter  # Currency conversion logic
+from implementations import DefaultRateRepository  # Storage of exchange rates in memory
+
+# Import abstract interfaces (DIP principle - dependency on abstractions)
+from interfaces import CurrencyConverter, InputHandler, OutputHandler, RateRepository
+
 # Import menu handler
 from menu_handler import MenuHandler
-# Import application mode classes
-from modes import InteractiveMode, DemoMode
+
 # Import text messages
 from messages import UNSUPPORTED_RUN_MODE
+
+# Import application mode classes
+from modes import DemoMode, InteractiveMode
 
 
 class CurrencyClient:
     """
     Facade for working with currency converter.
-    
+
     The class coordinates the work of various system components,
     providing a simple interface for client code.
     Follows SOLID principles:
@@ -50,7 +54,7 @@ class CurrencyClient:
     ) -> None:
         """
         Initializes client with optional dependency injection.
-        
+
         Args:
             input_handler: Input handler (default: ConsoleInputHandler)
             output_handler: Output handler (default: ConsoleOutputHandler)
@@ -73,7 +77,7 @@ class CurrencyClient:
     def run(self, mode: Optional[RunMode] = None) -> None:
         """
         Runs the application in specified mode.
-        
+
         Args:
             mode: Run mode (INTERACTIVE or DEMO).
                  If None, determined automatically based on input type.
@@ -99,9 +103,9 @@ class CurrencyClient:
         """Runs interactive mode."""
         # Create interactive mode object, passing all necessary components
         interactive_mode = InteractiveMode(
-            input_handler=self._input,        # Input handler for reading user commands
-            output_handler=self._output,     # Output handler for displaying information
-            converter=self._converter,       # Converter for performing currency conversion
+            input_handler=self._input,  # Input handler for reading user commands
+            output_handler=self._output,  # Output handler for displaying information
+            converter=self._converter,  # Converter for performing currency conversion
             rate_repository=self._rate_repository,  # Repository for working with rates
             menu_handler=self._menu_handler,  # Handler for displaying menu
         )
@@ -112,8 +116,8 @@ class CurrencyClient:
         """Runs demonstration mode."""
         # Create demo mode object, passing necessary components
         demo_mode = DemoMode(
-            output_handler=self._output,     # Output handler for showing results
-            converter=self._converter,       # Converter for performing conversion
+            output_handler=self._output,  # Output handler for showing results
+            converter=self._converter,  # Converter for performing conversion
             rate_repository=self._rate_repository,  # Repository for getting rates
         )
         # Run demo mode (shows conversion example)
